@@ -1,0 +1,103 @@
+---
+- hosts: all
+  vars_files:
+  - vars/main.yml
+  roles:
+  - role: geerlingguy.git
+    become: "{{nonroot}}"
+  - suzuki-shunsuke.gvm
+  - ansible-gvm-module
+  tasks:
+  - name: gvm list
+    gvm:
+      subcommand: list
+      gvm_root: "{{gvm_root}}"
+    register: result
+    failed_when: result.failed or result.changed
+  - debug:
+      var: result
+  - debug:
+      var: result.versions
+  - name: gvm install go1.4 --binary
+    gvm:
+      version: go1.4
+      gvm_root: "{{gvm_root}}"
+      binary: yes
+    register: result
+  - debug:
+      var: result
+  - name: gvm install go1.5 --binary
+    gvm:
+      version: go1.5
+      gvm_root: "{{gvm_root}}"
+      binary: yes
+    register: result
+  - debug:
+      var: result
+  - name: gvm install go1.5 --binary
+    gvm:
+      version: go1.5
+      gvm_root: "{{gvm_root}}"
+      binary: yes
+    register: result
+    failed_when: result.failed or result.changed
+  - debug:
+      var: result
+  - name: gvm uninstall go1.5
+    gvm:
+      subcommand: uninstall
+      version: go1.5
+      gvm_root: "{{gvm_root}}"
+    register: result
+    failed_when: result.failed or not result.changed
+  - debug:
+      var: result
+  - name: gvm listall
+    gvm:
+      subcommand: listall
+      gvm_root: "{{gvm_root}}"
+    register: result
+    failed_when: result.failed or result.changed
+  - debug:
+      var: result.versions
+  - name: gvm alias create foo go1.4
+    gvm:
+      subcommand: alias create
+      version: go1.4
+      alias: foo
+      gvm_root: "{{gvm_root}}"
+    register: result
+  - debug:
+      var: result
+  - name: gvm alias create foo go1.5
+    gvm:
+      subcommand: alias create
+      version: go1.5
+      alias: foo
+      gvm_root: "{{gvm_root}}"
+    register: result
+    failed_when: not result.failed
+  - name: gvm alias list
+    gvm:
+      subcommand: alias list
+      gvm_root: "{{gvm_root}}"
+    register: result
+    failed_when: result.failed or result.changed
+  - debug:
+      var: result
+  - name: gvm alias delete foo
+    gvm:
+      subcommand: alias delete
+      alias: foo
+      gvm_root: "{{gvm_root}}"
+    register: result
+  - debug:
+      var: result
+  - name: gvm alias delete foo
+    gvm:
+      subcommand: alias delete
+      alias: foo
+      gvm_root: "{{gvm_root}}"
+    register: result
+  - debug:
+      var: result
