@@ -1,6 +1,7 @@
 {
   "name": "ansible-gvm-module",
   "description": "ansible module to run gvm command",
+  "version": "1.0.0",
   "author": "Suzuki Shunsuke <suzuki.shunsuke.1989@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/suzuki-shunsuke/ansible-gvm-module",
