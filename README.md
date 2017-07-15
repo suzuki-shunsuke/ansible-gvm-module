@@ -175,6 +175,10 @@ alias | str | yes | | foo |
 
 See [CHANGELOG.md](CHANGELOG.md).
 
+## See also
+
+* [suzuki-shunsuke.gvm](https://github.com/suzuki-shunsuke/ansible-gvm): ansible role to install gvm
+
 ## Licence
 
 [MIT](LICENSE)
